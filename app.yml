@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expense-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: expense
+  template:
+    metadata:
+      labels:
+        app: expense
+    spec:
+      containers:
+        - name: app
+          image: porramatesiri/expense-app:v7
+          env:
+            - name: DATABASE_URL
+              value: postgresql://admin:admin@postgres:5432/expense
+          ports:
+            - containerPort: 3000
